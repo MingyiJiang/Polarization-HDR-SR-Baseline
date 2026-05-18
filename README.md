@@ -22,12 +22,21 @@ Conventional image super-resolution methods mainly rely on RGB intensity informa
 
 ```text
 .
-├── README.md
-├── scripts/
-│   └── read_image.py
-├── data/
-│   └── README.md
-└── results/
-    └── README.md
+|-- README.md
+|-- scripts/
+|   `-- read_image.py
+|-- data/
+|   `-- README.md
+`-- results/
+    `-- README.md
+```
 
-This line was added from my local computer.
+## Next Steps
+
+- Add sample data loading examples
+- Document polarization image formats
+- Create a baseline preprocessing pipeline
+
+## Status
+
+This repository is currently in the initial setup stage.
