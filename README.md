@@ -42,6 +42,8 @@ Conventional image super-resolution methods mainly rely on RGB intensity informa
 This repository is currently in the initial setup stage.
 真难学啊
 学学学是啊大欢喜那么
+
+电脑上登陆你
 ## Installation
 
 Install Python dependencies with:
