@@ -101,21 +101,11 @@ Failed to connect to github.com port 443
 This was caused by Git not using the proxy. A temporary PowerShell proxy that worked was:
 
 ```powershell
-$env:HTTPS_PROXY="http://127.0.0.1:7890"
-$env:HTTP_PROXY="http://127.0.0.1:7890"
+$env:HTTPS_PROXY="http://127.0.0.1:7897"
+$env:HTTP_PROXY="http://127.0.0.1:7897"
 ```
 
 This only applies to the current terminal session.
-
-## PowerShell Note
-
-PowerShell may print an execution policy warning for:
-
-```text
-C:\Users\MingyiJiang\Documents\WindowsPowerShell\profile.ps1
-```
-
-This is related to profile script execution policy and Conda initialization. The user chose not to change it for now. It does not usually block Git commands.
 
 ## Response Preferences
 
