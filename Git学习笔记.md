@@ -75,6 +75,42 @@ git push
 
 注意：这样只能让 `.env` 从新提交开始不再被跟踪。历史提交中曾经出现过的 `.env` 仍然存在。如果 `.env` 里包含 token、API key、密码等敏感信息，应视为已经泄露，需要更换密钥。
 
+### 已经 tracked 的文件写进 .gitignore 后为什么还需要 git rm --cached
+
+已经被 Git 跟踪的文件，单纯写进 `.gitignore` 不会停止跟踪。`.gitignore` 只影响未 tracked 的新文件，不会改变 Git 已经记录在索引里的文件。
+
+如果目标是让某个已经 tracked 的文件以后不再进入仓库，例如 `AGENTS.md`，需要两步：
+
+```powershell
+# 1. 让以后这个文件被忽略
+# 在 .gitignore 中写入：
+AGENTS.md
+
+# 2. 从 Git 索引中移除，但保留本地文件
+git rm --cached AGENTS.md
+```
+
+执行 `git rm --cached AGENTS.md` 后，`git status` 里可能会看到：
+
+```text
+D  AGENTS.md
+?? .gitignore
+```
+
+这里的 `D AGENTS.md` 不是说本地磁盘上的 `AGENTS.md` 被删除了，而是说相对于 Git 仓库，下一次 commit 会记录“仓库不再跟踪 AGENTS.md”。本地文件仍然保留。
+
+完整逻辑是：
+
+```text
+已 tracked 的 AGENTS.md
+  -> 写进 .gitignore：不够，仍会继续跟踪
+  -> git rm --cached AGENTS.md：停止跟踪
+  -> commit：记录“仓库不再管理 AGENTS.md”
+  -> push：GitHub 上新版本不再有 AGENTS.md
+```
+
+但历史提交里曾经出现过的 `AGENTS.md` 仍然存在，只是最新版本不再跟踪它。
+
 ### 当前理解模型
 
 ```text
